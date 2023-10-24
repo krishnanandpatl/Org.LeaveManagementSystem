@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Org.LeaveManagementSystem.Application.DTOs
+namespace Org.LeaveManagementSystem.Application.DTOs.LeaveType
 {
     public class LeaveTypeDto : BaseDto
     {
+        public string Name { get; set; }
+        public int DefaultDays { get; set; }
     }
 }
