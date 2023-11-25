@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Org.LeaveManagementSystem.Application.Features.LeaveAllocation.Requests.Queries
+namespace Org.LeaveManagementSystem.Application.Features.LeaveAllocations.Requests.Queries
 {
     public class GetLeaveAllocationListRequest : IRequest<List<LeaveAllocationDto>>
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Org.LeaveManagementSystem.Application.Features.LeaveRequest.Requests.Queries
+namespace Org.LeaveManagementSystem.Application.Features.LeaveRequests.Requests.Queries
 {
     public class GetLeaveRequestListRequest : IRequest<List<LeaveRequestDto>>
     {

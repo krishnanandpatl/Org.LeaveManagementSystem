@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Org.LeaveManagementSystem.Application.DTOs.LeaveRequest;
-using Org.LeaveManagementSystem.Application.Features.LeaveRequest.Requests.Queries;
+using Org.LeaveManagementSystem.Application.Features.LeaveRequests.Requests.Queries;
 using Org.LeaveManagementSystem.Application.Persistence.Contracts;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Org.LeaveManagementSystem.Application.Features.LeaveRequest.Handlers.Queries
+namespace Org.LeaveManagementSystem.Application.Features.LeaveRequests.Handlers.Queries
 {
     internal class GetLeaveRequestDetailHandler : IRequestHandler<GetLeaveRequestDetailRequest, LeaveRequestDto>
     {
