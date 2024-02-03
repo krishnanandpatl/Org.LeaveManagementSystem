@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Org.LeaveManagementSystem.Application.DTOs.LeaveAllocation.Validators;
+using Org.LeaveManagementSystem.Application.Exceptions;
 using Org.LeaveManagementSystem.Application.Features.LeaveAllocations.Requests.Commands;
 using Org.LeaveManagementSystem.Application.Persistence.Contracts;
 using Org.LeaveManageSystem.Domain;
@@ -30,7 +31,7 @@ namespace Org.LeaveManagementSystem.Application.Features.LeaveAllocations.Handle
             var validatedResult = await validator.ValidateAsync(request.CreateLeaveAllocationDto);
             if (validatedResult.IsValid == false)
             {
-                throw new Exception();
+                throw new ValidationException(validatedResult);
             }
 
             var leaveAllocation = _mapper.Map<LeaveAllocation>(request.CreateLeaveAllocationDto);

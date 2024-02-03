@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Org.LeaveManagementSystem.Application.DTOs.LeaveRequest.Validators;
+using Org.LeaveManagementSystem.Application.Exceptions;
 using Org.LeaveManagementSystem.Application.Features.LeaveRequests.Requests.Commands;
 using Org.LeaveManagementSystem.Application.Persistence.Contracts;
 using Org.LeaveManageSystem.Domain;
@@ -30,7 +31,7 @@ namespace Org.LeaveManagementSystem.Application.Features.LeaveRequests.Handlers.
             var validationResult = await validator.ValidateAsync(request.UpdateLeaveRequestDto);
             if (validationResult.IsValid == false)
             {
-                throw new Exception();
+                throw new ValidationException(validationResult);
             }
 
             var leaveRequest = await _leaveRequestRepository.Get(request.Id);
