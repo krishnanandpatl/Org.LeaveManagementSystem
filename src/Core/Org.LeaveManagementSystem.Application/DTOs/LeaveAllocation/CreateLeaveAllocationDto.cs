@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Org.LeaveManagementSystem.Application.DTOs.LeaveAllocation
 {
-    public class CreateLeaveAllocationDto
+    public class CreateLeaveAllocationDto : ILeaveAllocationDto
     {
         public int Period { get; set; }
         public int LeaveTypeId { get; set; }

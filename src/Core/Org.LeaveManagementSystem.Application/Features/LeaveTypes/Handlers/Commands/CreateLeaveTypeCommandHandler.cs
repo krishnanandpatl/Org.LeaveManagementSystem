@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Org.LeaveManagementSystem.Application.DTOs.LeaveType.Validators;
 using Org.LeaveManagementSystem.Application.Features.LeaveTypes.Requests.Commands;
 using Org.LeaveManagementSystem.Application.Persistence.Contracts;
 using Org.LeaveManageSystem.Domain;
@@ -23,8 +24,16 @@ namespace Org.LeaveManagementSystem.Application.Features.LeaveTypes.Handlers.Com
         }
         public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreateLeaveTypeDtoValidator();
+            var validationResult = await validator.ValidateAsync(request.CreateLeaveTypeDto);
+
+            if (validationResult.IsValid == false)
+                throw new Exception();
+
             var leaveType = _mapper.Map<LeaveType>(request.CreateLeaveTypeDto);
+
             leaveType = await _leaveTypeRepository.Add(leaveType);
+
             return leaveType.Id;
         }
     }

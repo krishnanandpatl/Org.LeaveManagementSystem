@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Org.LeaveManagementSystem.Application.DTOs.LeaveRequest
 {
-    public class CreateLeaveRequestDto
+    public class CreateLeaveRequestDto:ILeaveRequestDto
     {
         public string RequestComments { get; set; }
         public int LeaveTypeId { get; set; }
