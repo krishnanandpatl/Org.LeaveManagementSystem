@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Org.LeaveManagementSystem.Application.DTOs.LeaveAllocation.Validators;
 using Org.LeaveManagementSystem.Application.Features.LeaveAllocations.Requests.Commands;
 using Org.LeaveManagementSystem.Application.Persistence.Contracts;
 using Org.LeaveManageSystem.Domain;
@@ -14,15 +15,24 @@ namespace Org.LeaveManagementSystem.Application.Features.LeaveAllocations.Handle
     public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, int>
     {
         private readonly ILeaveAllocationRepository _leaveAllocationRepository;
+        private readonly ILeaveTypeRepository _leaveTypeRepository;
         private readonly Mapper _mapper;
 
-        public CreateLeaveAllocationCommandHandler(ILeaveAllocationRepository leaveAllocationRepository,Mapper mapper)
+        public CreateLeaveAllocationCommandHandler(ILeaveAllocationRepository leaveAllocationRepository,ILeaveTypeRepository leaveTypeRepository,Mapper mapper)
         {
             _leaveAllocationRepository = leaveAllocationRepository;
+            _leaveTypeRepository = leaveTypeRepository;
             _mapper = mapper;
         }
         public async Task<int> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreateLeaveAllocationDtoValidator(_leaveTypeRepository);
+            var validatedResult = await validator.ValidateAsync(request.CreateLeaveAllocationDto);
+            if (validatedResult.IsValid == false)
+            {
+                throw new Exception();
+            }
+
             var leaveAllocation = _mapper.Map<LeaveAllocation>(request.CreateLeaveAllocationDto);
             leaveAllocation = await _leaveAllocationRepository.Add(leaveAllocation);
             return leaveAllocation.Id;

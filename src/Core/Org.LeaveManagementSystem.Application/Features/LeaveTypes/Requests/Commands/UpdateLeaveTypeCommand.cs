@@ -8,6 +8,6 @@ namespace Org.LeaveManagementSystem.Application.Features.LeaveTypes.Requests.Com
 {
     public class UpdateLeaveTypeCommand : IRequest<Unit>
     {
-        public LeaveTypeDto LeaveTypeDto { get; set; }
+        public UpdateLeaveTypeDto UpdateLeaveTypeDto { get; set; }
     }
 }
